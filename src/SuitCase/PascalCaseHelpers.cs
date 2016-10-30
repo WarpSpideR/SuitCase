@@ -15,6 +15,12 @@ namespace SuitCase
 
         public static string ToPascal(this CasingContext input)
         {
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
+
+            if (input == CasingContext.Empty)
+                return input.ToString();
+
             throw new NotImplementedException();
         }
 
