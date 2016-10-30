@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using SuitCase;
 
 namespace SuitCase.Tests
 {
@@ -11,7 +10,7 @@ namespace SuitCase.Tests
     {
 
         [Fact]
-        public void ConvertsToCasingContextCorrectly()
+        public void ConvertsFromPascalCorrectly()
         {
             string input = "SomeSimpleTestData";
 
@@ -24,6 +23,16 @@ namespace SuitCase.Tests
             Assert.Equal(terms[1], "simple");
             Assert.Equal(terms[2], "test");
             Assert.Equal(terms[3], "data");
+        }
+
+        [Fact]
+        public void ConvertsToPascalCorrectly()
+        {
+            CasingContext context = new CasingContext(new[] { "some", "simple", "test", "data" });
+
+            string result = context.ToPascal();
+
+            Assert.Equal(result, "SomeSimpleTestData");
         }
 
     }

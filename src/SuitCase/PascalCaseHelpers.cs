@@ -10,7 +10,7 @@ namespace SuitCase
 
         public static CasingContext FromPascal(this string input)
         {
-            throw new NotImplementedException();
+            return CasingContext.Empty;
         }
 
         public static string ToPascal(this CasingContext input)
