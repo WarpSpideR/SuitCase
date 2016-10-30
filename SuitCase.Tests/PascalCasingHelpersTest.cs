@@ -9,30 +9,54 @@ namespace SuitCase.Tests
     public class PascalCasingHelpersTest
     {
 
-        [Fact]
-        public void ConvertsFromPascalCorrectly()
+        public static IEnumerable<object[]> FromData
         {
-            string input = "SomeSimpleTestData";
+            get
+            {
+                return new List<object[]>
+                {
+                    new object[] { "SomeSimpleTestData", new [] { "some", "simple", "test", "data" } },
+                    new object[] { "Single", new [] { "single", } },
+                    new object[] { "StRaNgeCasIng", new [] { "st", "ra", "nge", "cas", "ing" } }
+                };
+            }
+        }
 
+        [Theory]
+        [MemberData("FromData")]
+        public void ConvertsFromPascalCorrectly(string input, string[] expected)
+        {
             CasingContext result = input.FromPascal();
 
             List<string> terms = result.Terms.ToList();
 
-            Assert.Equal(terms.Count, 4);
-            Assert.Equal(terms[0], "some");
-            Assert.Equal(terms[1], "simple");
-            Assert.Equal(terms[2], "test");
-            Assert.Equal(terms[3], "data");
+            Assert.Equal(terms.Count, expected.Length);
+            for (var i = 0; i < terms.Count; i++)
+            {
+                Assert.Equal(expected[i], terms[i]);
+            }
         }
 
-        [Fact]
-        public void ConvertsToPascalCorrectly()
+        public static IEnumerable<object[]> ToData
         {
-            CasingContext context = new CasingContext(new[] { "some", "simple", "test", "data" });
+            get
+            {
+                return new List<object[]>
+                {
+                    new object[] { new CasingContext(new[] { "some", "simple", "test", "data" }), "SomeSimpleTestData" },
+                    new object[] { new CasingContext(new[] { "single" }), "Single" },
+                    new object[] { new CasingContext(new[] { "st", "ra", "nge", "cas", "ing" }), "StRaNgeCasIng" }
+                };
+            }
+        }
 
-            string result = context.ToPascal();
+        [Theory]
+        [MemberData("ToData")]
+        public void ConvertsToPascalCorrectly(CasingContext input, string expected)
+        {
+            string result = input.ToPascal();
 
-            Assert.Equal(result, "SomeSimpleTestData");
+            Assert.Equal(expected, result);
         }
 
     }
