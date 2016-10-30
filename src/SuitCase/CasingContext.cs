@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace SuitCase
 {
-    public class Class1
+    public class CasingContext
     {
-        public Class1()
-        {
-        }
+
+
+
     }
 }
