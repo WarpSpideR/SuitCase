@@ -26,7 +26,7 @@ namespace SuitCase.Tests
         [MemberData("FromData")]
         public void ConvertsFromCorrectly(string input, string[] expected)
         {
-            CasingContext result = input.FromCamel();
+            CasingContext result = input.FromCamelCase();
 
             List<string> terms = result.Terms.ToList();
 
@@ -44,17 +44,17 @@ namespace SuitCase.Tests
                 return new List<object[]>
                 {
                     new object[] { new CasingContext(new[] { "some", "simple", "test", "data" }), "someSimpleTestData" },
-                    new object[] { new CasingContext(new[] { "single" }), "Single" },
+                    new object[] { new CasingContext(new[] { "single" }), "single" },
                     new object[] { new CasingContext(new[] { "st", "ra", "nge", "cas", "ing" }), "stRaNgeCasIng" }
                 };
             }
         }
 
         [Theory]
-        [MemberData("ToDat")]
+        [MemberData("ToData")]
         public void ConvertsToCorrectly(CasingContext input, string expected)
         {
-            string result = input.ToCamel();
+            string result = input.ToCamelCase();
 
             Assert.Equal(expected, result);
         }
