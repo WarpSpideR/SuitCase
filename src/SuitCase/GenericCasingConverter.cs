@@ -35,7 +35,7 @@ namespace SuitCase
         {
             List<string> parts = new List<string>();
             string part = string.Empty;
-
+            
             input = RemovePrefix(input, Syntax);
             input = RemoveSuffix(input, Syntax);
 
