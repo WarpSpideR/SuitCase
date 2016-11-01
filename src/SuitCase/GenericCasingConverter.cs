@@ -61,16 +61,6 @@ namespace SuitCase
         }
 
         /// <summary>
-        /// Converts from invarient case to that specified in <see cref="Syntax"/>
-        /// </summary>
-        /// <param name="context">Invarient cased phrase</param>
-        /// <returns>Converted phrase</returns>
-        public string ToCase(CasingContext context)
-        {
-            return ToCase(context, Syntax);
-        }
-
-        /// <summary>
         /// Converts from the current syntax case to a given syntax
         /// </summary>
         /// <param name="input">Phrase to convert</param>
@@ -78,7 +68,18 @@ namespace SuitCase
         /// <returns>Converted phrase</returns>
         public string ToCase(string input, CasingSyntax syntax)
         {
-            throw new NotImplementedException();
+            CasingContext context = FromCase(input);
+            return ToCase(context, syntax);
+        }
+
+        /// <summary>
+        /// Converts from invarient case to that specified in <see cref="Syntax"/>
+        /// </summary>
+        /// <param name="context">Invarient cased phrase</param>
+        /// <returns>Converted phrase</returns>
+        public string ToCase(CasingContext context)
+        {
+            return ToCase(context, Syntax);
         }
 
         /// <summary>
