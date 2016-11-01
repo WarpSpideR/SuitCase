@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2E536DFD-6
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SuitCase.Tests", "SuitCase.Tests\SuitCase.Tests.xproj", "{7598D616-AFBB-4125-A458-72DE9F90DADE}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SuitCase.Benchmarks", "SuitCase.Benchmarks\SuitCase.Benchmarks.xproj", "{24B7B375-F97E-46F1-80E0-69719C7AB4BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{7598D616-AFBB-4125-A458-72DE9F90DADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7598D616-AFBB-4125-A458-72DE9F90DADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7598D616-AFBB-4125-A458-72DE9F90DADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B7B375-F97E-46F1-80E0-69719C7AB4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B7B375-F97E-46F1-80E0-69719C7AB4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B7B375-F97E-46F1-80E0-69719C7AB4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B7B375-F97E-46F1-80E0-69719C7AB4BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{732939FE-05B7-4B19-A9D8-94399F076B1A} = {65A34710-62BC-4D69-AC7A-4265FF2FE4DA}
 		{7598D616-AFBB-4125-A458-72DE9F90DADE} = {2E536DFD-6740-445D-8AE6-F14E4B5F647E}
+		{24B7B375-F97E-46F1-80E0-69719C7AB4BA} = {2E536DFD-6740-445D-8AE6-F14E4B5F647E}
 	EndGlobalSection
 EndGlobal
