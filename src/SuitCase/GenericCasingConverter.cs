@@ -33,6 +33,7 @@ namespace SuitCase
             string part = string.Empty;
 
             input = RemovePrefix(input, Syntax);
+            input = RemoveSuffix(input, Syntax);
 
             for (int i = 0; i < input.Length; i++)
             {
@@ -85,6 +86,8 @@ namespace SuitCase
                 index++;
             }
 
+            result = ApplySuffix(result, syntax);
+
             return result;
         }
 
@@ -128,6 +131,40 @@ namespace SuitCase
             if (!string.IsNullOrEmpty(syntax.Prefix))
             {
                 return syntax.Prefix + input;
+            }
+            return input;
+        }
+
+        /// <summary>
+        /// Removes any suffixes from the input
+        /// </summary>
+        /// <param name="input">Input</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Input without any suffixes</returns>
+        private string RemoveSuffix(string input, CasingSyntax syntax)
+        {
+            if (string.IsNullOrEmpty(syntax.Suffix))
+            {
+                return input;
+            }
+            if (input.EndsWith(syntax.Suffix))
+            {
+                return input.Substring(0, input.Length - syntax.Suffix.Length);
+            }
+            return input;
+        }
+        
+        /// <summary>
+        /// Applies any suffixes from the input
+        /// </summary>
+        /// <param name="input">Input</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Input with any suffixes</returns>
+        private string ApplySuffix(string input, CasingSyntax syntax)
+        {
+            if (!string.IsNullOrEmpty(syntax.Suffix))
+            {
+                return input + syntax.Suffix;
             }
             return input;
         }

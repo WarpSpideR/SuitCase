@@ -58,5 +58,30 @@ namespace SuitCase.Tests
             Assert.Equal(output, result);
         }
 
+        [Theory]
+        [InlineData("SomeSimpleTestData__", TermTermination.Uppercase, ' ', true, Capitalisation.Title, "__")]
+        [InlineData("someSimpleTestData--", TermTermination.Uppercase, ' ', true, Capitalisation.LowerThenTitle, "--")]
+        [InlineData("some-simple-test-data", TermTermination.Character, '-', false, Capitalisation.Lower, null)]
+        [InlineData("Some_Simple_Test_Data", TermTermination.Character, '_', false, Capitalisation.Title, "")]
+        [InlineData("Some Simple Test Data ", TermTermination.Character, ' ', false, Capitalisation.Title, " ")]
+        public void ToCaseRespectsSuffix(string output, TermTermination terminationType, char terminationChar, bool includeTerminator, Capitalisation capitalisation, string suffix)
+        {
+            CasingSyntax syntax = new CasingSyntax()
+            {
+                TerminationType = terminationType,
+                Terminator = terminationChar,
+                IncludeTerminator = includeTerminator,
+                Capitalisation = capitalisation,
+                Suffix = suffix
+            };
+            GenericCasingConverter converter = new GenericCasingConverter(syntax);
+
+            CasingContext context = new CasingContext(new[] { "some", "simple", "test", "data" });
+
+            string result = converter.ToCase(context);
+
+            Assert.Equal(output, result);
+        }
+
     }
 }
