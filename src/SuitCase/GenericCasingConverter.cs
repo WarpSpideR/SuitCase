@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace SuitCase
 {
+
+    /// <summary>
+    /// Class that can transform between different syntaxes
+    /// </summary>
     public class GenericCasingConverter
     {
 
@@ -23,10 +27,10 @@ namespace SuitCase
         }
 
         /// <summary>
-        /// Converts a string into its 
+        /// Converts a string into its invarient cased terms
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input">Phrase to convert</param>
+        /// <returns>Invarient cased phrase</returns>
         public CasingContext FromCase(string input)
         {
             List<string> parts = new List<string>();
@@ -56,16 +60,33 @@ namespace SuitCase
             return new CasingContext(parts);
         }
 
+        /// <summary>
+        /// Converts from invarient case to that specified in <see cref="Syntax"/>
+        /// </summary>
+        /// <param name="context">Invarient cased phrase</param>
+        /// <returns>Converted phrase</returns>
         public string ToCase(CasingContext context)
         {
             return ToCase(context, Syntax);
         }
 
+        /// <summary>
+        /// Converts from the current syntax case to a given syntax
+        /// </summary>
+        /// <param name="input">Phrase to convert</param>
+        /// <param name="syntax">Syntax to convert to</param>
+        /// <returns>Converted phrase</returns>
         public string ToCase(string input, CasingSyntax syntax)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Converts from invarient cased pharse to the given syntax
+        /// </summary>
+        /// <param name="context">Phrase to convert</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Converted phrase</returns>
         protected string ToCase(CasingContext context, CasingSyntax syntax)
         {
             string result = ApplyPrefix(syntax);
