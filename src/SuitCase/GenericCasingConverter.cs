@@ -32,6 +32,8 @@ namespace SuitCase
             List<string> parts = new List<string>();
             string part = string.Empty;
 
+            input = RemovePrefix(input, Syntax);
+
             for (int i = 0; i < input.Length; i++)
             {
                 char currentChar = input[i];
@@ -65,7 +67,7 @@ namespace SuitCase
 
         protected string ToCase(CasingContext context, CasingSyntax syntax)
         {
-            string result = string.Empty;
+            string result = ApplyPrefix(syntax);
             var index = 0;
 
             foreach (string rawTerm in context.Terms)
@@ -86,6 +88,57 @@ namespace SuitCase
             return result;
         }
 
+        /// <summary>
+        /// Removes any prefixes from the input
+        /// </summary>
+        /// <param name="input">Input</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Input without any prefixes</returns>
+        private string RemovePrefix(string input, CasingSyntax syntax)
+        {
+            if (string.IsNullOrEmpty(syntax.Prefix))
+            {
+                return input;
+            }
+            if (input.StartsWith(syntax.Prefix))
+            {
+                return input.Substring(syntax.Prefix.Length);
+            }
+            return input;
+        }
+
+        /// <summary>
+        /// Applies any prefixes from the input
+        /// </summary>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Input with any prefixes</returns>
+        private string ApplyPrefix(CasingSyntax syntax)
+        {
+            return ApplyPrefix(string.Empty, syntax);
+        }
+
+        /// <summary>
+        /// Applies any prefixes from the input
+        /// </summary>
+        /// <param name="input">Input</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Input with any prefixes</returns>
+        private string ApplyPrefix(string input, CasingSyntax syntax)
+        {
+            if (!string.IsNullOrEmpty(syntax.Prefix))
+            {
+                return syntax.Prefix + input;
+            }
+            return input;
+        }
+
+        /// <summary>
+        /// Applies capitalisation to a term
+        /// </summary>
+        /// <param name="term">Term to capitalise</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <param name="index">Index in pharse</param>
+        /// <returns>Capitalised term</returns>
         private string ApplyCapitalisation(string term, CasingSyntax syntax, int index)
         {
             switch (syntax.Capitalisation)
@@ -105,6 +158,12 @@ namespace SuitCase
             }
         }
 
+        /// <summary>
+        /// Applys the relevant terminator to the given term
+        /// </summary>
+        /// <param name="term">Term to be terminated</param>
+        /// <param name="syntax">Syntax to use</param>
+        /// <returns>Terminated term</returns>
         private string ApplyTerminator(string term, CasingSyntax syntax)
         {
             switch (Syntax.TerminationType)
@@ -114,10 +173,15 @@ namespace SuitCase
                 case TermTermination.Character:
                     return syntax.Terminator + term;
                 default:
-                    throw new InvalidOperationException("Invalid Term Termination");
+                    throw new InvalidOperationException("Unknown Term Termination");
             }
         }
 
+        /// <summary>
+        /// Determines whether the given character is a terminator
+        /// </summary>
+        /// <param name="character">Character to test</param>
+        /// <returns>True if a terminator, false otherwise</returns>
         protected bool IsTerminator(char character)
         {
             switch (Syntax.TerminationType)
@@ -127,7 +191,7 @@ namespace SuitCase
                 case TermTermination.Character:
                     return character == Syntax.Terminator;
                 default:
-                    throw new InvalidOperationException("Invalid Term Termination");
+                    throw new InvalidOperationException("Unknown Term Termination");
             }
         }
     }

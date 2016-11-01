@@ -36,27 +36,29 @@ namespace SuitCase.Tests
         }
 
         [Theory]
-        [InlineData("SomeSimpleTestData", TermTermination.Uppercase, ' ', true, Capitalisation.Title)]
-        [InlineData("someSimpleTestData", TermTermination.Uppercase, ' ', true, Capitalisation.LowerThenTitle)]
-        [InlineData("some-simple-test-data", TermTermination.Character, '-', false, Capitalisation.Lower)]
-        [InlineData("Some_Simple_Test_Data", TermTermination.Character, '_', false, Capitalisation.Title)]
-        [InlineData("Some Simple Test Data", TermTermination.Character, ' ', false, Capitalisation.Title)]
-        public void ToCaseRespectsTermination(string output, TermTermination terminationType, char terminationChar, bool includeTerminator, Capitalisation capitalisation)
+        [InlineData("__someSimpleTestData", TermTermination.Uppercase, ' ', true, "__")]
+        [InlineData("__Some_Simple_Test_Data", TermTermination.Character, '_', false, "__")]
+        [InlineData("[Some_Simple_Test_Data", TermTermination.Character, '_', false, "[")]
+        [InlineData("   Some Simple Test Data", TermTermination.Character, ' ', false, "   ")]
+        public void FromCaseRespectsPrefix(string input, TermTermination terminationType, char terminationChar, bool includeTerminator, string prefix)
         {
             CasingSyntax syntax = new CasingSyntax()
             {
                 TerminationType = terminationType,
                 Terminator = terminationChar,
                 IncludeTerminator = includeTerminator,
-                Capitalisation = capitalisation
+                Prefix = prefix
             };
             GenericCasingConverter converter = new GenericCasingConverter(syntax);
 
-            CasingContext context = new CasingContext(new[] { "some", "simple", "test", "data" });
+            CasingContext context = converter.FromCase(input);
+            List<string> result = context.Terms.ToList();
 
-            string result = converter.ToCase(context);
-
-            Assert.Equal(output, result);
+            Assert.Equal(4, result.Count);
+            Assert.Equal("some", result[0]);
+            Assert.Equal("simple", result[1]);
+            Assert.Equal("test", result[2]);
+            Assert.Equal("data", result[3]);
         }
 
     }

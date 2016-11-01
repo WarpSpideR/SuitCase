@@ -12,6 +12,8 @@ namespace SuitCase
         public char Terminator { get; set; }
         public bool IncludeTerminator { get; set; }
         public Capitalisation Capitalisation { get; set; }
+        public string Prefix { get; set; }
+        public string Suffix { get; set; }
 
     }
 }
