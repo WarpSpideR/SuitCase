@@ -11,7 +11,8 @@ namespace SuitCase.Benchmarks
         public static void Main(string[] args)
         {
             var switcher = new BenchmarkSwitcher(new[] {
-                typeof(GenericCasingConverterBenchmarks)
+                typeof(GenericCasingConverterBenchmarks),
+                typeof(GenericVsSpecificPascalBenchmarks)
             });
             switcher.Run(args);
         }
