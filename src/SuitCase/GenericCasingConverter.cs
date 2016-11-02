@@ -88,7 +88,7 @@ namespace SuitCase
         /// <param name="context">Phrase to convert</param>
         /// <param name="syntax">Syntax to use</param>
         /// <returns>Converted phrase</returns>
-        protected string ToCase(CasingContext context, CasingSyntax syntax)
+        public string ToCase(CasingContext context, CasingSyntax syntax)
         {
             string result = ApplyPrefix(syntax);
             var index = 0;
