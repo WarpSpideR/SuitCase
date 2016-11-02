@@ -64,6 +64,7 @@ namespace SuitCase.Tests
         [InlineData("some-simple-test-data", TermTermination.Character, '-', false, Capitalisation.Lower, null)]
         [InlineData("Some_Simple_Test_Data", TermTermination.Character, '_', false, Capitalisation.Title, "")]
         [InlineData("Some Simple Test Data ", TermTermination.Character, ' ', false, Capitalisation.Title, " ")]
+        [InlineData("SOME_SIMPLE_TEST_DATA", TermTermination.Character, '_', false, Capitalisation.Upper, null)]
         public void ToCaseRespectsSuffix(string output, TermTermination terminationType, char terminationChar, bool includeTerminator, Capitalisation capitalisation, string suffix)
         {
             CasingSyntax syntax = new CasingSyntax()
